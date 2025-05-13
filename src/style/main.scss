@@ -1,0 +1,97 @@
+// bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+/* Global styling for this template */
+body {
+  overflow-x: hidden;
+  @include body-font;
+}
+
+p {
+  line-height: 1.75;
+}
+
+.text-primary {
+  color: $primary !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  @include heading-font;
+}
+
+.cursor-pointer {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+// Highlight color customization
+::-moz-selection {
+  background: $primary;
+  text-shadow: none;
+}
+
+::selection {
+  background: $primary;
+  text-shadow: none;
+}
+
+img::selection {
+  background: transparent;
+}
+
+img::-moz-selection {
+  background: transparent;
+}
+
+/* Components */
+// Button Styles
+.btn {
+  @include heading-font;
+  font-weight: 700;
+}
+
+.btn-xl {
+  font-size: 18px;
+  line-height: 18px;
+  padding: 10px 35px;
+  .buttonTitle {
+    margin: auto;
+  }
+}
+
+.btn-primary {
+  background-color: $primary;
+  border-color: $primary;
+  &:active,
+  &:focus,
+  &:hover {
+    background-color: darken($primary, 7.5%) !important;
+    border-color: darken($primary, 7.5%) !important;
+    color: white;
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(158, 188, 159, 0.5) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .btn-xl {
+    font-size: 8px;
+    line-height: 8px;
+    padding: 10px 30px;
+    .buttonTitle {
+      margin: auto;
+      font-size: 14px;
+    }
+    .buttonSubtitle {
+      font-size: 12px;
+    }
+  }
+}
