@@ -30,7 +30,7 @@ timeline: [
   {
     imageFileName: "placeholder.jpg",
     imageContent: "September\r\n12th\r\n2026",
-    header: "Zeitraum",
+    header: "12. SEPTEMBER 2026",
     subheader: "Unser großer Tag!"
   }
 ]
