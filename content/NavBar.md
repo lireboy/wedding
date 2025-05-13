@@ -1,4 +1,4 @@
 ---
 brand: "Franzi & Timur"
-menuText: "Menu "
+menuText: "Menü"
 ---

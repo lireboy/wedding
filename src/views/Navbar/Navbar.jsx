@@ -56,6 +56,7 @@ const MyNavbar = ({ anchors, frontmatter, extraItems }) => {
             {anchors.map((anchor) => (
               <NavItem key={anchor} to={anchor} onClick={closeMenu} />
             ))}
+            <NavItem key="Teilnahme" to="Teilnahme" href="/teilnahme" onClick={closeMenu} />
           </Nav>
           {extraItems}
         </Navbar.Collapse>
