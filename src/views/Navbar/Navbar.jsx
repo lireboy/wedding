@@ -1,14 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-
 import clsx from "clsx";
-
 import { Navbar, Container, Nav } from "react-bootstrap";
-
 import useWindowOnScroll from "hooks/useWindowOnScroll";
 import useSmoothScrollTo from "hooks/useSmoothScrollTo";
 import Icon from "components/Icon";
 import NavItem from "components/NavItem";
+import { navigate } from "gatsby";
 
 import "./Navbar.scss";
 
@@ -27,6 +25,7 @@ const MyNavbar = ({ anchors, frontmatter, extraItems }) => {
   const handleBrandClick = React.useCallback(() => {
     closeMenu();
     handleScrollToTop();
+    navigate("/");
   }, [closeMenu, handleScrollToTop]);
 
   const [shrink, setShrink] = React.useState(false);
@@ -38,7 +37,7 @@ const MyNavbar = ({ anchors, frontmatter, extraItems }) => {
 
   return (
     <Navbar
-      className={clsx("navbar-root", { "navbar-shrink": shrink })}
+      className={clsx("navbar-root", { "navbar-shrink": shrink }, { "navbar-hide": anchors.length === 0 })}
       expand="lg"
       fixed="top"
       expanded={expanded}

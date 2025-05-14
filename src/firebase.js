@@ -1,6 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
+console.log("🔍 Firebase ENV Check:");
+console.log("API KEY:", process.env.GATSBY_FIREBASE_API_KEY);
+console.log("PROJECT ID:", process.env.GATSBY_FIREBASE_PROJECT_ID);
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: process.env.GATSBY_FIREBASE_API_KEY,

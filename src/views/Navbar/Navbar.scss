@@ -21,6 +21,15 @@
       color: darken($primary, 10%);
     }
   }
+
+  &.navbar-hide {
+  button {
+    display: none;
+  }
+  .navbar-collapse {
+    display: none !important;
+  }
+}
 }
 @media (min-width: 992px) {
   .navbar-root {
