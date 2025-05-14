@@ -2,10 +2,11 @@
   max-width: 400px;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: #fffafc;
+  background-color: rgba(158, 188, 159, 0.3);
   border-radius: 12px;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
 }
 
 .rsvp-form h2 {
@@ -27,14 +28,14 @@
   border-radius: 6px;
 }
 
-.rsvp-form button {
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 8px;
-  background-color: #d16ba5;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  width: 100%;
-  margin-top: 1rem;
-}
+// .rsvp-form button {
+//   padding: 0.6rem 1.2rem;
+//   border: none;
+//   border-radius: 8px;
+//   background-color: #d16ba5;
+//   color: white;
+//   font-weight: bold;
+//   cursor: pointer;
+//   width: 100%;
+//   margin-top: 1rem;
+// }

@@ -8,6 +8,7 @@ import {
   updateDoc,
   serverTimestamp
 } from "firebase/firestore";
+import { Button } from "react-bootstrap";
 import db from "../firebase";
 
 const RSVP = () => {
@@ -102,9 +103,9 @@ const RSVP = () => {
       </label>
       <br />
 
-      <button type="submit" disabled={loading}>
-        {loading ? "Wird gesendet..." : "Antwort senden"}
-      </button>
+      <Button size="xl" variant="primary" className="text-uppercase main-button hero-button" type="submit" disabled={loading}>
+        <p className="buttonTitle">{loading ? "Wird gesendet..." : "Antwort senden"}</p>
+      </Button>
     </form>
   );
 };

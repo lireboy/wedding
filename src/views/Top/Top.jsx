@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-
+import { navigate } from "gatsby";
 import { Button } from "react-bootstrap";
 import useSmoothScrollTo from "hooks/useSmoothScrollTo";
 import ImageCard from "components/ImageCard";
@@ -15,6 +15,10 @@ const Top = ({ frontmatter }) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const scrollToSection = useSmoothScrollTo(jumpToAnchor);
 
+  const handleNavgiateTo = (navigationUrl) => {
+    navigate(navigationUrl);
+  };
+
   const extraInfoPart = (
     <div className="buttonsWrapper">
       {/* <a
@@ -28,8 +32,8 @@ const Top = ({ frontmatter }) => {
         </Button>
       </a> */}
       <div className="individButtonWrapper">
-        <Button size="xl" variant="primary" className="text-uppercase main-button hero-button" onClick={scrollToSection}>
-          <p className="buttonTitle">Zu den Bildern</p>
+        <Button size="xl" variant="primary" className="text-uppercase main-button hero-button" onClick={() => handleNavgiateTo("/teilnahme")}>
+          <p className="buttonTitle">Teilnahme</p>
         </Button>
       </div>
     </div>
