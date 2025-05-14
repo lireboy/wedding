@@ -3,12 +3,12 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyB9q0xpwXaKbl0--5r47JBDwvPxj0Gn58o",
-  authDomain: "hochzeit-rsvp.firebaseapp.com",
-  projectId: "hochzeit-rsvp",
-  storageBucket: "hochzeit-rsvp.firebasestorage.app",
-  messagingSenderId: "1059115959541",
-  appId: "1:1059115959541:web:eb13fd3a3b43eae824b1bc"
+  apiKey: process.env.GATSBY_FIREBASE_API_KEY,
+  authDomain: process.env.GATSBY_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.GATSBY_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.GATSBY_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.GATSBY_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.GATSBY_FIREBASE_APP_ID
 };
 
 const app = initializeApp(firebaseConfig);
