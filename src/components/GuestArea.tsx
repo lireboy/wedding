@@ -12,6 +12,22 @@ type Photo = {
   src: string
 }
 
+async function readApiJson<T>(response: Response): Promise<T> {
+  const contentType = response.headers.get('content-type')?.toLowerCase() || ''
+  if (!contentType.includes('application/json')) {
+    throw new Error(
+      `Der Gästeserver hat keine gültige Antwort geliefert (HTTP ${response.status}).`,
+    )
+  }
+  try {
+    return (await response.json()) as T
+  } catch {
+    throw new Error(
+      `Die Antwort des Gästeservers war ungültig (HTTP ${response.status}).`,
+    )
+  }
+}
+
 export default function GuestArea() {
   const [password, setPassword] = useState('')
   const [expiresAt, setExpiresAt] = useState<number | null>(null)
@@ -32,7 +48,11 @@ export default function GuestArea() {
       signal: controller.signal,
     })
       .then(async (response) => {
-        const data = await response.json()
+        const data = await readApiJson<{
+          authenticated: boolean
+          expiresAt: number | null
+          error?: string
+        }>(response)
         if (!response.ok)
           throw new Error(
             data.error || 'Der Gästezugang ist gerade nicht erreichbar.',
@@ -72,7 +92,7 @@ export default function GuestArea() {
             expire()
             return
           }
-          const data = await response.json()
+          const data = await readApiJson<{ photos: Photo[] }>(response)
           if (!response.ok)
             throw new Error('Die Galerie konnte nicht geladen werden.')
           setPhotos(data.photos)
@@ -95,7 +115,7 @@ export default function GuestArea() {
           return
         }
         if (!response.ok) throw new Error('Dateianfrage nicht erreichbar.')
-        const data = await response.json()
+        const data = await readApiJson<{ url: string | null }>(response)
         if (!controller.signal.aborted) setRequestUrl(data.url)
       })
       .catch(() => {
@@ -128,7 +148,9 @@ export default function GuestArea() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password }),
       })
-      const data = await response.json()
+      const data = await readApiJson<{ expiresAt: number; error?: string }>(
+        response,
+      )
       if (!response.ok)
         throw new Error(
           data.error || 'Der Zugang konnte nicht geöffnet werden.',
