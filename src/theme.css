@@ -111,7 +111,7 @@ em {
   background: #eef0e7;
 }
 .rose-section {
-  background: #f2eae3;
+  background: #e7ebdf;
 }
 .draft-label {
   font-size: 0.7rem;
@@ -202,6 +202,48 @@ em {
   width: 1px;
   background: #c9cabb;
   min-height: 25px;
+}
+.day-moment-visual {
+  min-height: 430px;
+  aspect-ratio: 4 / 5;
+  border-radius: 45% 45% 8px 8px;
+  background: #e1d6c8;
+}
+.day-moment-image {
+  display: block;
+  object-fit: cover;
+  animation: day-moment-in 0.35s ease-out;
+}
+.day-moment-caption {
+  max-width: calc(100% - 1.5rem);
+  color: var(--text-color);
+  background: rgb(255 253 247 / 92%);
+  backdrop-filter: blur(8px);
+}
+.day-moment-button {
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.day-moment-button:hover,
+.day-moment-button.is-active {
+  background: rgb(255 254 250 / 62%);
+}
+.day-moment-button.is-active .timeline-dot {
+  color: #fff;
+  background: #637b5e;
+  border-color: #637b5e;
+}
+@keyframes day-moment-in {
+  from {
+    opacity: 0;
+    transform: scale(1.015);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 .gallery-card {
   background: transparent;

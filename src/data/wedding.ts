@@ -1,42 +1,65 @@
+import mainImage from '../assets/images/main_image.jpg'
+import jaWort from '../assets/images/Das_ja_Wort.jpg'
+import anschneiden from '../assets/images/anschneiden.jpg'
+import gruppe from '../assets/images/gruppe.jpg'
+import zweisamkeit from '../assets/images/zweisamkeit.jpg'
+import tanz from '../assets/images/tanz.jpg'
+import party from '../assets/images/party.jpg'
+
 // Hier später eure Namen, Texte und Bildpfade eintragen.
 export const wedding = {
   names: 'Franzi & Timur',
   date: '11.09. - 12.09.2026',
   location: 'Hochzeitsvilla Zehlendorf & Kavaliershaus Caputh',
-  story: [
-    {
-      title: 'Das erste Hallo',
-      text: 'Wo habt ihr euch kennengelernt? Erzählt von dem Zufall, der Begegnung oder dem gemeinsamen Freund, mit dem alles begann.',
-    },
-    {
-      title: 'Gemeinsame Wege',
-      text: 'Welche Reise, welches Abenteuer oder welcher kleine Alltagsmoment hat euch besonders zusammengeschweißt?',
-    },
-    {
-      title: 'Ein Ja für immer',
-      text: 'Hier ist Platz für euren Antrag – und die Vorfreude auf den Tag, an dem ihr eure Liebe gefeiert habt.',
-    },
-  ],
+  heroImage: mainImage,
   day: [
     {
       title: 'Das Ja-Wort',
       icon: 'pi-heart',
-      text: 'Eure Trauung, eure Worte und dieser eine Blick. Was hat diesen Moment für euch besonders gemacht?',
+      text: 'Text zur Trauung',
+      image: jaWort,
+      imageAlt: 'Franzi und Timur an ihrem Hochzeitstag',
+      imagePosition: 'center center',
     },
     {
-      title: 'Auf uns und auf euch',
+      title: 'Zeit für Kuchen',
       icon: 'pi-sun',
-      text: 'Die ersten Umarmungen, ein gemeinsames Anstoßen und endlich Zeit für all eure Lieblingsmenschen.',
+      text: 'Text zum Anstoßen und Feiern',
+      image: anschneiden,
+      imageAlt: 'Ein gemeinsamer Moment mit den Hochzeitsgästen',
+      imagePosition: 'center 30%',
     },
     {
-      title: 'Zusammen am Tisch',
+      title: 'Wir alle zusammen',
       icon: 'pi-sparkles',
-      text: 'Gutes Essen, liebevolle Reden und Geschichten, über die ihr noch lange lachen werdet.',
+      text: 'Text über das Essen und die Unterhaltung',
+      image: gruppe,
+      imageAlt: 'Franzi und Timur bei ihrer Hochzeitsfeier',
+      imagePosition: 'center 60%',
     },
     {
-      title: 'Bis zum letzten Tanz',
+      title: 'Zweisamkeit',
       icon: 'pi-moon',
-      text: 'Euer erster Tanz und eine volle Tanzfläche. Welche Erinnerung an die Feier möchtet ihr festhalten?',
+      text: 'Text zum Tanz',
+      image: zweisamkeit,
+      imageAlt: 'Franzi und Timur in einer romantischen Moment',
+      imagePosition: 'center 90%',
+    },
+    {
+      title: 'Unser Tanz',
+      icon: 'pi-moon',
+      text: 'Text zum Tanz',
+      image: tanz,
+      imageAlt: 'Franzi und Timur beim Tanzen',
+      imagePosition: 'center 75%',
+    },
+    {
+      title: 'Party',
+      icon: 'pi-moon',
+      text: 'Text zum Tanz',
+      image: party,
+      imageAlt: 'Party mit allen Gästen',
+      imagePosition: 'center 60%',
     },
   ],
 }

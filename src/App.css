@@ -182,3 +182,7 @@
     border-right-color: var(--border);
   }
 }
+
+.torbogen {
+  border-radius: 50% 50% 0 0 / 30% 30% 0 0;
+}
