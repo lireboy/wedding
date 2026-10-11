@@ -1,5 +1,5 @@
 import mainImage from '../assets/images/main_image.jpg'
-import jaWort from '../assets/images/Das_ja_Wort.jpg'
+import jaWort from '../assets/images/Das_ja_wort.jpg'
 import anschneiden from '../assets/images/anschneiden.jpg'
 import gruppe from '../assets/images/gruppe.jpg'
 import zweisamkeit from '../assets/images/zweisamkeit.jpg'
