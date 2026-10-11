@@ -23,6 +23,14 @@ export function createGuestHandler(env: Environment) {
   const cookieName = production ? '__Host-wedding_guest' : 'wedding_guest'
   const secret = env.GUEST_SESSION_SECRET || ''
   const password = env.GUEST_PASSWORD || ''
+  const redisUrl =
+    env.UPSTASH_REDIS_REST_URL ||
+    env.UPSTASH_REDIS_REST_KV_REST_API_URL ||
+    ''
+  const redisToken =
+    env.UPSTASH_REDIS_REST_TOKEN ||
+    env.UPSTASH_REDIS_REST_KV_REST_API_TOKEN ||
+    ''
   const passwordValid = password.length >= 12 && password.length <= 512
   const configured = passwordValid && secret.length >= 32
   const sign = (value: string) =>
@@ -66,13 +74,12 @@ export function createGuestHandler(env: Environment) {
     // Never trust arbitrary client-supplied X-Forwarded-For.
     const key = `wedding:login:${digest(String(address || 'unknown')).toString('hex')}`
     if (production) {
-      if (!env.UPSTASH_REDIS_REST_URL || !env.UPSTASH_REDIS_REST_TOKEN)
-        throw new Error('Rate limit not configured')
-      const response = await fetch(env.UPSTASH_REDIS_REST_URL, {
+      if (!redisUrl || !redisToken) throw new Error('Rate limit not configured')
+      const response = await fetch(redisUrl, {
         method: 'POST',
         signal: AbortSignal.timeout(5000),
         headers: {
-          Authorization: `Bearer ${env.UPSTASH_REDIS_REST_TOKEN}`,
+          Authorization: `Bearer ${redisToken}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify([
