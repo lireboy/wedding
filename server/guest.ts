@@ -5,8 +5,8 @@ import {
   timingSafeEqual,
 } from 'node:crypto'
 import type { IncomingMessage, ServerResponse } from 'node:http'
-import { gallery } from './gallery.ts'
-import { fileRequestUrl } from './dropbox.ts'
+import { gallery } from './gallery.js'
+import { fileRequestUrl } from './dropbox.js'
 
 type Environment = Record<string, string | undefined>
 type RequestWithBody = IncomingMessage & { body?: unknown }
