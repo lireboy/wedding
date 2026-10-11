@@ -1,10 +1,10 @@
-import mainImage from '../assets/images/main_image.jpg'
-import jaWort from '../assets/images/Das_ja_wort.jpg'
-import anschneiden from '../assets/images/anschneiden.jpg'
-import gruppe from '../assets/images/gruppe.jpg'
-import zweisamkeit from '../assets/images/zweisamkeit.jpg'
-import tanz from '../assets/images/tanz.jpg'
-import party from '../assets/images/party.jpg'
+import mainImage from '../assets/images/main_image.webp'
+import jaWort from '../assets/images/Das_ja_wort.webp'
+import anschneiden from '../assets/images/anschneiden.webp'
+import gruppe from '../assets/images/gruppe.webp'
+import zweisamkeit from '../assets/images/zweisamkeit.webp'
+import tanz from '../assets/images/tanz.webp'
+import party from '../assets/images/party.webp'
 
 // Hier später eure Namen, Texte und Bildpfade eintragen.
 export const wedding = {
@@ -65,8 +65,6 @@ export const wedding = {
 }
 export const navigation = [
   { id: 'start', label: 'Start' },
-  { id: 'unsere-geschichte', label: 'Wir zwei' },
   { id: 'unser-tag', label: 'Unser Tag' },
-
   { id: 'gaestebereich', label: 'Für unsere Gäste' },
 ]

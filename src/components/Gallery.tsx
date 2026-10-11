@@ -1,19 +1,41 @@
 import { useState } from 'react'
 import { Button } from 'primereact/button'
 import { Dialog } from 'primereact/dialog'
-import PhotoPlaceholder from './PhotoPlaceholder'
 
-type Photo = {
-  id: number | string
-  title: string
+type GalleryPhoto = {
+  id: string
   category: string
-  variant: string
   src: string
 }
 
-export default function Gallery({ photos }: { photos: Photo[] }) {
+const imageModules = import.meta.glob<string>(
+  '../assets/gallery/*/*.webp',
+  {
+    eager: true,
+    query: '?url',
+    import: 'default',
+  },
+)
+
+const categoryLabel = (folder: string) =>
+  folder.charAt(0).toLocaleUpperCase('de') + folder.slice(1)
+
+const photos: GalleryPhoto[] = Object.entries(imageModules)
+  .sort(([pathA], [pathB]) =>
+    pathA.localeCompare(pathB, 'de', { numeric: true }),
+  )
+  .map(([path, src]) => {
+    const folder = path.split('/').at(-2) || 'weitere'
+    return {
+      id: path,
+      category: categoryLabel(folder),
+      src,
+    }
+  })
+
+export default function Gallery() {
   const [category, setCategory] = useState('Alle')
-  const [selected, setSelected] = useState<number | string | null>(null)
+  const [selected, setSelected] = useState<string | null>(null)
   const filtered = photos.filter(
     (photo) => category === 'Alle' || photo.category === category,
   )
@@ -71,27 +93,19 @@ export default function Gallery({ photos }: { photos: Photo[] }) {
                 type="button"
                 className="gallery-card w-full p-0 border-none text-left cursor-pointer"
                 onClick={() => setSelected(item.id)}
-                aria-label={`${item.title} – große Ansicht öffnen`}
+                aria-label={`Foto aus ${item.category} in großer Ansicht öffnen`}
               >
                 <div className="gallery-photo">
-                  {item.src ? (
-                    <img
-                      className="media-cover w-full h-full"
-                      src={item.src}
-                      alt={item.title}
-                      loading="lazy"
-                    />
-                  ) : (
-                    <PhotoPlaceholder
-                      label={item.title ?? 'Foto'}
-                      variant={item.variant}
-                    />
-                  )}
+                  <img
+                    className="media-cover w-full h-full"
+                    src={item.src}
+                    alt={`Hochzeitsfoto aus der Kategorie ${item.category}`}
+                    loading="lazy"
+                  />
                 </div>
                 <span className="flex align-items-center justify-content-between gap-2 py-3">
                   <span>
                     <span className="eyebrow block mb-2">{item.category}</span>
-                    <span className="editorial text-xl">{item.title}</span>
                   </span>
                   <i
                     className="pi pi-arrow-up-right muted"
@@ -103,7 +117,7 @@ export default function Gallery({ photos }: { photos: Photo[] }) {
           ))}
         </div>
         <Dialog
-          header={photo?.title}
+          header={photo?.category}
           visible={!!photo}
           onHide={() => setSelected(null)}
           className="w-11 md:w-8 lg:w-6"
@@ -114,19 +128,11 @@ export default function Gallery({ photos }: { photos: Photo[] }) {
           {photo && (
             <>
               <div className="gallery-detail">
-                {photo.src ? (
-                  <img
-                    src={photo.src}
-                    alt={photo.title}
-                    className="w-full h-full media-contain"
-                  />
-                ) : (
-                  <PhotoPlaceholder
-                    label={photo.title}
-                    variant={photo.variant}
-                    detail="Hier wird später euer echtes Foto angezeigt."
-                  />
-                )}
+                <img
+                  src={photo.src}
+                  alt={`Hochzeitsfoto aus der Kategorie ${photo.category}`}
+                  className="w-full h-full media-contain"
+                />
               </div>
               <div className="flex align-items-center justify-content-between mt-3">
                 <Button

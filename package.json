@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "setup:guest": "node scripts/setup-guest.mjs",
+    "gallery:build": "node scripts/build-gallery.mjs",
     "test": "node --test tests/guest.test.mjs",
     "dev": "vite",
     "build": "tsc -b && vite build",

@@ -5,7 +5,6 @@ import {
   timingSafeEqual,
 } from 'node:crypto'
 import type { IncomingMessage, ServerResponse } from 'node:http'
-import { gallery } from './gallery.js'
 import { fileRequestUrl } from './dropbox.js'
 
 type Environment = Record<string, string | undefined>
@@ -124,7 +123,6 @@ export function createGuestHandler(env: Environment) {
       session: 'GET',
       login: 'POST',
       logout: 'POST',
-      gallery: 'GET',
       'file-request': 'GET',
     }
     if (!methods[action]) return json(404, { error: 'Nicht gefunden.' })
@@ -218,7 +216,6 @@ export function createGuestHandler(env: Environment) {
       return json(401, { error: 'Bitte zuerst den Gästezugang öffnen.' })
     if (action === 'file-request')
       return json(200, { url: fileRequestUrl(env.DROPBOX_FILE_REQUEST_URL) })
-    if (action === 'gallery') return json(200, { photos: gallery })
     return json(404, { error: 'Nicht gefunden.' })
   }
 }

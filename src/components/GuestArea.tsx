@@ -4,14 +4,6 @@ import { Password } from 'primereact/password'
 import Gallery from './Gallery'
 import UploadSection from './UploadSection'
 
-type Photo = {
-  id: number | string
-  title: string
-  category: string
-  variant: string
-  src: string
-}
-
 async function readApiJson<T>(response: Response): Promise<T> {
   const contentType = response.headers.get('content-type')?.toLowerCase() || ''
   if (!contentType.includes('application/json')) {
@@ -31,14 +23,12 @@ async function readApiJson<T>(response: Response): Promise<T> {
 export default function GuestArea() {
   const [password, setPassword] = useState('')
   const [expiresAt, setExpiresAt] = useState<number | null>(null)
-  const [photos, setPhotos] = useState<Photo[]>([])
   const [requestUrl, setRequestUrl] = useState<string | null>(null)
   const [requestLoading, setRequestLoading] = useState(true)
   const [requestError, setRequestError] = useState('')
   const [checking, setChecking] = useState(true)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
-  const [galleryError, setGalleryError] = useState('')
   const heading = useRef<HTMLHeadingElement>(null)
 
   useEffect(() => {
@@ -73,7 +63,6 @@ export default function GuestArea() {
     const controller = new AbortController()
     const expire = () => {
       setExpiresAt(null)
-      setPhotos([])
       setRequestUrl(null)
       setError('Dein Zugang ist abgelaufen. Bitte melde dich erneut an.')
     }
@@ -82,28 +71,6 @@ export default function GuestArea() {
       if (Date.now() >= expiresAt) expire()
     }
     window.addEventListener('focus', checkTime)
-    const loadGallery = () =>
-      fetch('/api/guest?action=gallery', {
-        credentials: 'same-origin',
-        signal: controller.signal,
-      })
-        .then(async (response) => {
-          if (response.status === 401) {
-            expire()
-            return
-          }
-          const data = await readApiJson<{ photos: Photo[] }>(response)
-          if (!response.ok)
-            throw new Error('Die Galerie konnte nicht geladen werden.')
-          setPhotos(data.photos)
-        })
-        .catch(() => {
-          if (!controller.signal.aborted)
-            setGalleryError(
-              'Die Galerie konnte nicht geladen werden. Bitte lade die Seite erneut.',
-            )
-        })
-    void loadGallery()
     // Load the Dropbox link independently of the gallery.
     fetch('/api/guest?action=file-request', {
       credentials: 'same-origin',
@@ -138,7 +105,6 @@ export default function GuestArea() {
     event.preventDefault()
     setBusy(true)
     setError('')
-    setGalleryError('')
     setRequestError('')
     setRequestLoading(true)
     try {
@@ -180,11 +146,9 @@ export default function GuestArea() {
       if (!response.ok)
         throw new Error('Abmelden fehlgeschlagen. Bitte erneut versuchen.')
       setExpiresAt(null)
-      setPhotos([])
       setRequestUrl(null)
       setRequestLoading(true)
       setRequestError('')
-      setGalleryError('')
       heading.current?.focus()
     } catch (reason) {
       setError(
@@ -274,16 +238,11 @@ export default function GuestArea() {
           >
             {error}
           </p>
-          {galleryError && (
-            <p role="alert" className="text-red-700">
-              {galleryError}
-            </p>
-          )}
         </div>
       </section>
       {expiresAt && (
         <>
-          <Gallery photos={photos} />
+          <Gallery />
           <UploadSection
             requestUrl={requestUrl}
             loading={requestLoading}
