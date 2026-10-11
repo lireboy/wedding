@@ -1,7 +1,6 @@
 import Header from './components/Header'
 import Footer from './components/Footer'
-import Gallery from './components/Gallery'
-import UploadSection from './components/UploadSection'
+import GuestArea from './components/GuestArea'
 import PhotoPlaceholder from './components/PhotoPlaceholder'
 import { wedding } from './data/wedding'
 
@@ -39,7 +38,7 @@ export default function App() {
                   <i className="pi pi-arrow-down text-sm" aria-hidden="true" />
                 </a>
                 <a
-                  href="#erinnerungen-teilen"
+                  href="#gaestebereich"
                   className="p-button p-button-outlined no-underline gap-2"
                 >
                   <i className="pi pi-upload" />
@@ -157,8 +156,7 @@ export default function App() {
             </div>
           </div>
         </section>
-        <Gallery />
-        <UploadSection />
+        <GuestArea />
       </main>
       <Footer />
     </div>

@@ -37,7 +37,7 @@ export default function Header() {
           className="hidden lg:flex align-items-center gap-4"
         >
           {navigation
-            .filter((item) => item.id !== 'erinnerungen-teilen')
+            .filter((item) => item.id !== 'gaestebereich')
             .map((item) => (
               <a
                 key={item.id}
@@ -49,14 +49,12 @@ export default function Header() {
               </a>
             ))}
           <a
-            href="#erinnerungen-teilen"
-            aria-current={
-              active === 'erinnerungen-teilen' ? 'location' : undefined
-            }
+            href="#gaestebereich"
+            aria-current={active === 'gaestebereich' ? 'location' : undefined}
             className="p-button p-button-sm no-underline gap-2"
           >
-            <i className="pi pi-upload" aria-hidden="true" />
-            Erinnerungen teilen
+            <i className="pi pi-lock" aria-hidden="true" />
+            Gästezugang
           </a>
         </nav>
         <Button

@@ -1,10 +1,6 @@
 type Props = { label: string; detail?: string; variant?: string }
 
-export default function PhotoPlaceholder({
-  label,
-  detail,
-  variant = 'sage',
-}: Props) {
+export default function PhotoPlaceholder({ variant = 'sage' }: Props) {
   return (
     <div
       className={`photo-placeholder photo-${variant} relative overflow-hidden flex flex-column align-items-center justify-content-center text-center p-4 h-full`}

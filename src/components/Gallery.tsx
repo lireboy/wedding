@@ -2,11 +2,18 @@ import { useState } from 'react'
 import { Button } from 'primereact/button'
 import { Dialog } from 'primereact/dialog'
 import PhotoPlaceholder from './PhotoPlaceholder'
-import { photos } from '../data/wedding'
 
-export default function Gallery() {
+type Photo = {
+  id: number | string
+  title: string
+  category: string
+  variant: string
+  src: string
+}
+
+export default function Gallery({ photos }: { photos: Photo[] }) {
   const [category, setCategory] = useState('Alle')
-  const [selected, setSelected] = useState<number | null>(null)
+  const [selected, setSelected] = useState<number | string | null>(null)
   const filtered = photos.filter(
     (photo) => category === 'Alle' || photo.category === category,
   )
@@ -37,20 +44,22 @@ export default function Gallery() {
           role="group"
           aria-label="Fotokategorie"
         >
-          {['Alle', 'Trauung', 'Wir zwei', 'Feier'].map((item) => (
-            <Button
-              key={item}
-              label={item}
-              rounded
-              outlined={category !== item}
-              size="small"
-              aria-pressed={category === item}
-              onClick={() => {
-                setCategory(item)
-                setSelected(null)
-              }}
-            />
-          ))}
+          {['Alle', ...new Set(photos.map((photo) => photo.category))].map(
+            (item) => (
+              <Button
+                key={item}
+                label={item}
+                rounded
+                outlined={category !== item}
+                size="small"
+                aria-pressed={category === item}
+                onClick={() => {
+                  setCategory(item)
+                  setSelected(null)
+                }}
+              />
+            ),
+          )}
         </div>
         <p className="text-sm muted mb-4" aria-live="polite">
           {filtered.length} Momente
@@ -74,7 +83,7 @@ export default function Gallery() {
                     />
                   ) : (
                     <PhotoPlaceholder
-                      label={item.title}
+                      label={item.title ?? 'Foto'}
                       variant={item.variant}
                     />
                   )}
