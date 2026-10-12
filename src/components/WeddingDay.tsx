@@ -29,9 +29,9 @@ export default function WeddingDay() {
                 className="day-moment-image w-full h-full"
                 style={{ objectPosition: selectedMoment.imagePosition }}
               />
-              <figcaption className="day-moment-caption absolute left-0 bottom-0 m-3 px-3 py-2 border-round-lg">
+              <figcaption className="day-moment-caption absolute left-0 bottom-0 m-2 lg:m-3 px-3 py-2 border-round-lg">
                 <span className="eyebrow">MOMENT 0{selectedIndex + 1}</span>
-                <strong className="editorial text-xl font-normal block mt-1">
+                <strong className="editorial text-lg font-normal block mt-1">
                   {selectedMoment.title}
                 </strong>
               </figcaption>
