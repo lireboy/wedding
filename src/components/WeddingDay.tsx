@@ -1,9 +1,16 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { wedding } from '../data/wedding'
 
 export default function WeddingDay() {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const selectedMoment = wedding.day[selectedIndex]
+
+  useEffect(() => {
+    wedding.day.forEach((moment) => {
+      const image = new Image()
+      image.src = moment.image
+    })
+  }, [])
 
   return (
     <section
