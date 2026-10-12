@@ -39,7 +39,7 @@ export default function App() {
                   <i className="pi pi-arrow-down text-sm" aria-hidden="true" />
                 </a>
                 <a
-                  href="#erinnerungen-teilen"
+                  href="#gaestebereich"
                   className="p-button no-underline gap-2"
                 >
                   <i className="pi pi-upload" />
