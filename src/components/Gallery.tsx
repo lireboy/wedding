@@ -1,9 +1,22 @@
 import { useState } from 'react'
-import { Button } from 'primereact/button'
-import { Dialog } from 'primereact/dialog'
+import {
+  ArrowDownLeftAndArrowUpRightToCenter,
+  ArrowsH,
+  ArrowsV,
+  ArrowUpRightAndArrowDownLeftFromCenter,
+  ChevronLeft,
+  ChevronRight,
+  Download,
+  Refresh,
+  Replay,
+  SearchMinus,
+  SearchPlus,
+} from '@primeicons/react'
+import { Button } from '@primereact/ui/button'
+import { Gallery as PrimeGallery } from '@primereact/ui/gallery'
+import { Toolbar } from '@primereact/ui/toolbar'
 
 type GalleryPhoto = {
-  id: string
   category: string
   src: string
 }
@@ -26,26 +39,25 @@ const photos: GalleryPhoto[] = Object.entries(imageModules)
   )
   .map(([path, src]) => {
     const folder = path.split('/').at(-2) || 'weitere'
+
     return {
-      id: path,
       category: categoryLabel(folder),
       src,
     }
   })
 
+const categories = ['Alle', ...new Set(photos.map((photo) => photo.category))]
+
 export default function Gallery() {
   const [category, setCategory] = useState('Alle')
-  const [selected, setSelected] = useState<string | null>(null)
   const filtered = photos.filter(
     (photo) => category === 'Alle' || photo.category === category,
   )
-  const photo = filtered.find((item) => item.id === selected)
-  const move = (direction: number) => {
-    const index = filtered.findIndex((item) => item.id === selected)
-    setSelected(
-      filtered[(index + direction + filtered.length) % filtered.length].id,
-    )
+
+  const selectCategory = (nextCategory: string) => {
+    setCategory(nextCategory)
   }
+
   return (
     <section
       id="lieblingsmomente"
@@ -53,107 +65,110 @@ export default function Gallery() {
       className="section-space px-4 md:px-6"
     >
       <div className="page-width mx-auto">
-        <div className="flex flex-column md:flex-row md:align-items-end justify-content-between gap-4 mb-5">
-          <div>
-            <h2 id="gallery-title" className="section-title mt-3 mb-0">
-              Unsere <em>Lieblingsmomente.</em>
-            </h2>
-          </div>
-        </div>
-        <div
-          className="flex flex-wrap gap-2 mb-4"
-          role="group"
-          aria-label="Fotokategorie"
-        >
-          {['Alle', ...new Set(photos.map((photo) => photo.category))].map(
-            (item) => (
-              <Button
-                key={item}
-                label={item}
-                rounded
-                outlined={category !== item}
-                size="small"
-                aria-pressed={category === item}
-                onClick={() => {
-                  setCategory(item)
-                  setSelected(null)
-                }}
-              />
-            ),
-          )}
-        </div>
-        <p className="text-sm muted mb-4" aria-live="polite">
-          {filtered.length} Momente
-        </p>
-        <div className="grid">
-          {filtered.map((item) => (
-            <div key={item.id} className="col-12 sm:col-6 lg:col-4">
-              <button
-                type="button"
-                className="gallery-card w-full p-0 border-none text-left cursor-pointer"
-                onClick={() => setSelected(item.id)}
-                aria-label={`Foto aus ${item.category} in großer Ansicht öffnen`}
-              >
-                <div className="gallery-photo">
-                  <img
-                    className="media-cover w-full h-full"
-                    src={item.src}
-                    alt={`Hochzeitsfoto aus der Kategorie ${item.category}`}
-                    loading="lazy"
-                  />
-                </div>
-                <span className="flex align-items-center justify-content-between gap-2 py-3">
-                  <span>
-                    <span className="eyebrow block mb-2">{item.category}</span>
-                  </span>
-                  <i
-                    className="pi pi-arrow-up-right muted"
-                    aria-hidden="true"
-                  />
-                </span>
-              </button>
+        <h2 id="gallery-title" className="section-title mt-3 mb-5">
+          Unsere <em>Lieblingsmomente.</em>
+        </h2>
+
+        <Toolbar.Root className="gallery-toolbar mb-4 bg-transparent border-none p-0">
+          <Toolbar.Start>
+            <div
+              className="flex flex-wrap gap-2"
+              role="group"
+              aria-label="Fotokategorie"
+            >
+              {categories.map((item) => (
+                <Button
+                  key={item}
+                  variant={category === item ? undefined : 'outlined'}
+                  aria-pressed={category === item}
+                  onClick={() => selectCategory(item)}
+                >
+                  {item}
+                </Button>
+              ))}
             </div>
-          ))}
-        </div>
-        <Dialog
-          header={photo?.category}
-          visible={!!photo}
-          onHide={() => setSelected(null)}
-          className="w-11 md:w-8 lg:w-6"
-          modal
-          dismissableMask
-          draggable={false}
+          </Toolbar.Start>
+          <Toolbar.End>
+            <span className="text-sm muted" aria-live="polite">
+              {filtered.length} Bilder
+            </span>
+          </Toolbar.End>
+        </Toolbar.Root>
+
+        <PrimeGallery.Root
+          key={category}
+          className="w-full wedding-gallery"
         >
-          {photo && (
-            <>
-              <div className="gallery-detail">
+          <PrimeGallery.Backdrop />
+          <PrimeGallery.Prev aria-label="Vorheriges Bild">
+            <ChevronLeft />
+          </PrimeGallery.Prev>
+          <PrimeGallery.Next aria-label="Nächstes Bild">
+            <ChevronRight />
+          </PrimeGallery.Next>
+
+          <PrimeGallery.Header className="justify-content-end gap-1">
+            <PrimeGallery.RotateLeft aria-label="Nach links drehen" title="Nach links drehen">
+              <Replay />
+            </PrimeGallery.RotateLeft>
+            <PrimeGallery.RotateRight aria-label="Nach rechts drehen" title="Nach rechts drehen">
+              <Refresh />
+            </PrimeGallery.RotateRight>
+            <PrimeGallery.ZoomIn aria-label="Vergrößern" title="Vergrößern">
+              <SearchPlus />
+            </PrimeGallery.ZoomIn>
+            <PrimeGallery.ZoomOut aria-label="Verkleinern" title="Verkleinern">
+              <SearchMinus />
+            </PrimeGallery.ZoomOut>
+            <PrimeGallery.FlipX aria-label="Horizontal spiegeln" title="Horizontal spiegeln">
+              <ArrowsH />
+            </PrimeGallery.FlipX>
+            <PrimeGallery.FlipY aria-label="Vertikal spiegeln" title="Vertikal spiegeln">
+              <ArrowsV />
+            </PrimeGallery.FlipY>
+            <PrimeGallery.Download aria-label="Bild herunterladen" title="Bild herunterladen">
+              <Download />
+            </PrimeGallery.Download>
+            <PrimeGallery.FullScreen
+              className="gallery-fullscreen-toggle"
+              aria-label="Vollbild umschalten"
+              title="Vollbild umschalten"
+            >
+              <ArrowUpRightAndArrowDownLeftFromCenter className="gallery-expand-icon" />
+              <ArrowDownLeftAndArrowUpRightToCenter className="gallery-compress-icon" />
+            </PrimeGallery.FullScreen>
+          </PrimeGallery.Header>
+
+          <PrimeGallery.Content>
+            {filtered.map((photo) => (
+              <PrimeGallery.Item key={photo.src}>
                 <img
                   src={photo.src}
                   alt={`Hochzeitsfoto aus der Kategorie ${photo.category}`}
-                  className="w-full h-full media-contain"
+                  className="gallery-main-image"
+                  draggable={false}
                 />
-              </div>
-              <div className="flex align-items-center justify-content-between mt-3">
-                <Button
-                  icon="pi pi-arrow-left"
-                  text
-                  aria-label="Vorheriges Foto"
-                  onClick={() => move(-1)}
-                />
-                <span className="muted text-sm" aria-live="polite">
-                  {filtered.findIndex((item) => item.id === selected) + 1} /{' '}
-                  {filtered.length}
-                </span>
-                <Button
-                  icon="pi pi-arrow-right"
-                  text
-                  aria-label="Nächstes Foto"
-                  onClick={() => move(1)}
-                />
-              </div>
-            </>
-          )}
-        </Dialog>
+              </PrimeGallery.Item>
+            ))}
+          </PrimeGallery.Content>
+
+          <PrimeGallery.Footer>
+            <PrimeGallery.Thumbnail>
+              <PrimeGallery.ThumbnailContent>
+                {filtered.map((photo, index) => (
+                  <PrimeGallery.ThumbnailItem key={photo.src} index={index}>
+                    <img
+                      src={photo.src}
+                      alt=""
+                      className="gallery-thumbnail-image w-full h-full media-cover"
+                      draggable={false}
+                    />
+                  </PrimeGallery.ThumbnailItem>
+                ))}
+              </PrimeGallery.ThumbnailContent>
+            </PrimeGallery.Thumbnail>
+          </PrimeGallery.Footer>
+        </PrimeGallery.Root>
       </div>
     </section>
   )

@@ -1,4 +1,4 @@
-import { Button } from 'primereact/button'
+import { Button } from '@primereact/ui/button'
 
 type Props = { requestUrl: string | null; loading: boolean; error: string }
 
@@ -34,14 +34,13 @@ export default function UploadSection({ requestUrl, loading, error }: Props) {
               </a>
             ) : (
               <Button
-                label={
-                  loading
-                    ? 'Dateianfrage wird geladen …'
-                    : 'Dateianfrage noch nicht verfügbar'
-                }
-                icon="pi pi-lock"
                 disabled
-              />
+              >
+                <i className="pi pi-lock" aria-hidden="true" />
+                {loading
+                  ? 'Dateianfrage wird geladen …'
+                  : 'Dateianfrage noch nicht verfügbar'}
+              </Button>
             )}
             {error && (
               <p role="alert" className="text-red-700 line-height-3 mb-0">

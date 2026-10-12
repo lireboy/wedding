@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Button } from 'primereact/button'
+import { Button } from '@primereact/ui/button'
 import { navigation } from '../data/wedding'
 
 export default function Header() {
@@ -60,14 +60,16 @@ export default function Header() {
         <Button
           id="navigation-toggle"
           className="lg:hidden"
-          text
+          variant="text"
           rounded
-          icon={open ? 'pi pi-times' : 'pi pi-bars'}
+          iconOnly
           aria-label={open ? 'Menü schließen' : 'Menü öffnen'}
           aria-expanded={open}
           aria-controls="mobile-navigation"
           onClick={() => setOpen(!open)}
-        />
+        >
+          <i className={open ? 'pi pi-times' : 'pi pi-bars'} aria-hidden="true" />
+        </Button>
       </div>
       <nav
         id="mobile-navigation"

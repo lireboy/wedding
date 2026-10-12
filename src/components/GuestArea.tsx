@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import { Button } from 'primereact/button'
-import { Password } from 'primereact/password'
+import { Eye, EyeSlash } from '@primeicons/react'
+import { Button } from '@primereact/ui/button'
+import {
+  InputPassword,
+  type InputPasswordValueChangeEvent,
+} from '@primereact/ui/inputpassword'
 import Gallery from './Gallery'
 import UploadSection from './UploadSection'
 
@@ -22,6 +26,7 @@ async function readApiJson<T>(response: Response): Promise<T> {
 
 export default function GuestArea() {
   const [password, setPassword] = useState('')
+  const [passwordMasked, setPasswordMasked] = useState(true)
   const [expiresAt, setExpiresAt] = useState<number | null>(null)
   const [requestUrl, setRequestUrl] = useState<string | null>(null)
   const [requestLoading, setRequestLoading] = useState(true)
@@ -184,12 +189,16 @@ export default function GuestArea() {
                 geöffnet.
               </p>
               <Button
-                label="Abmelden"
-                icon="pi pi-lock"
-                outlined
-                loading={busy}
+                variant="outlined"
+                disabled={busy}
                 onClick={logout}
-              />
+              >
+                <i
+                  className={busy ? 'pi pi-spinner pi-spin' : 'pi pi-lock'}
+                  aria-hidden="true"
+                />
+                {busy ? 'Abmelden …' : 'Abmelden'}
+              </Button>
             </div>
           ) : (
             <div className="surface-card border-round-xl p-4 md:p-5 max-w-30rem">
@@ -202,28 +211,44 @@ export default function GuestArea() {
                 <label htmlFor="guest-password" className="font-medium">
                   Gästepasswort
                 </label>
-                <Password
-                  inputId="guest-password"
-                  name="password"
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                  feedback={false}
-                  toggleMask
-                  required
-                  autoComplete="current-password"
-                  maxLength={512}
-                  disabled={busy}
-                  className="w-full"
-                  inputClassName="w-full"
-                  aria-describedby="guest-help guest-error"
-                />
+                <div className="flex align-items-stretch gap-2">
+                  <InputPassword
+                    id="guest-password"
+                    name="password"
+                    value={password}
+                    onValueChange={(event: InputPasswordValueChangeEvent) =>
+                      setPassword(event.value)
+                    }
+                    mask={passwordMasked}
+                    required
+                    autoComplete="current-password"
+                    maxLength={512}
+                    disabled={busy}
+                    className="w-full"
+                    aria-describedby="guest-help guest-error"
+                  />
+                  <Button
+                    type="button"
+                    variant="outlined"
+                    iconOnly
+                    aria-label={
+                      passwordMasked ? 'Passwort anzeigen' : 'Passwort verbergen'
+                    }
+                    onClick={() => setPasswordMasked((masked) => !masked)}
+                  >
+                    {passwordMasked ? <Eye /> : <EyeSlash />}
+                  </Button>
+                </div>
                 <Button
                   type="submit"
-                  label="Zugang öffnen"
-                  icon="pi pi-unlock"
-                  loading={busy}
-                  disabled={!password}
-                />
+                  disabled={!password || busy}
+                >
+                  <i
+                    className={busy ? 'pi pi-spinner pi-spin' : 'pi pi-unlock'}
+                    aria-hidden="true"
+                  />
+                  {busy ? 'Zugang wird geöffnet …' : 'Zugang öffnen'}
+                </Button>
               </form>
               <p className="text-sm muted line-height-3 mb-0">
                 Der Zugang bleibt auf diesem Gerät bis zu acht Stunden geöffnet.
