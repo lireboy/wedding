@@ -33,6 +33,8 @@ const imageModules = import.meta.glob<string>(
 const categoryLabel = (folder: string) =>
   folder.charAt(0).toLocaleUpperCase('de') + folder.slice(1)
 
+const categoryOrder = ['Trauung', 'Feier', 'Einsendungen']
+
 const photos: GalleryPhoto[] = Object.entries(imageModules)
   .sort(([pathA], [pathB]) =>
     pathA.localeCompare(pathB, 'de', { numeric: true }),
@@ -44,6 +46,13 @@ const photos: GalleryPhoto[] = Object.entries(imageModules)
       category: categoryLabel(folder),
       src,
     }
+  })
+  .sort((photoA, photoB) => {
+    const indexA = categoryOrder.indexOf(photoA.category)
+    const indexB = categoryOrder.indexOf(photoB.category)
+
+    return (indexA < 0 ? categoryOrder.length : indexA) -
+      (indexB < 0 ? categoryOrder.length : indexB)
   })
 
 const categories = ['Alle', ...new Set(photos.map((photo) => photo.category))]

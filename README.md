@@ -54,3 +54,8 @@ Zum vollständigen lokalen Ausprobieren deshalb `npm run dev` verwenden.
 
 Auf Vercel werden die Server-Variablen separat eingetragen. Dort benötigt der
 Login-Schutz weiterhin die Redis-Konfiguration aus `.env.example` und `APP_ORIGIN`.
+
+## Neue Bilder konvertieren
+```bash
+python scripts/prepare_gallery_images.py "src/assets/gallery/einsendungen"
+```
