@@ -16,12 +16,11 @@ export default function WeddingDay() {
             Ein Tag fürs <em>Herz.</em>
           </h2>
         </div>
-        <div className="grid align-items-center">
-          <div className="col-12 md:col-7 md:pr-5">
+        <div className="grid align-items-start">
+          <div className="col-12 lg:col-7 lg:pr-5">
             <figure
               id="day-moment-image"
               className="day-moment-visual relative overflow-hidden m-0"
-              style={{ height: '650px', minHeight: '600px', width: '100%' }}
             >
               <img
                 key={selectedIndex}
@@ -38,7 +37,7 @@ export default function WeddingDay() {
               </figcaption>
             </figure>
           </div>
-          <div className="col-12 md:col-5 pt-5 md:pt-0">
+          <div className="col-12 lg:col-5 pt-5 lg:pt-0">
             <ol className="list-none p-0 m-0">
               {wedding.day.map((item, index) => {
                 const active = selectedIndex === index

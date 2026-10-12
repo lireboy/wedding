@@ -5,6 +5,8 @@
   --surface-card: #fffefa;
   --surface-border: #dddcd2;
   --text-color: #303d35;
+  --text-color-green: #647c60;
+  --text-color-green-highlight: #81a07c;
   --text-color-secondary: #626b61;
   --primary-color: #4c6652;
   --primary-color-text: #ffffff;
@@ -64,7 +66,7 @@ a {
   letter-spacing: -0.035em;
 }
 em {
-  color: #647c60;
+  color: var(--text-color-green);
   font-weight: 400;
 }
 .brand {
@@ -122,28 +124,23 @@ em {
   display: inline-block;
 }
 .p-button {
-  background: #4c6652;
-  border-color: #4c6652;
+  background: var(--text-color-green) !important;
+  background-color: var(--text-color-green) !important;
+  color: var(--primary-color-text) !important;
+  border: none !important;
   border-radius: 8px;
   font-weight: 500;
   height: 35px;
 }
 .p-button:not(:disabled):hover {
-  background: #3d5543;
-  border-color: #3d5543;
-}
-.p-button.p-button-outlined,
-.p-button.p-button-text {
-  color: #3d5843;
-  background: transparent;
-}
-.p-button.p-button-outlined:not(:disabled):hover,
-.p-button.p-button-text:not(:disabled):hover {
-  background: #e4eadf;
-  color: #304c37;
+  background: var(--text-color-green-highlight) !important;
+  border-color: var(--text-color-green-highlight) !important;
 }
 .p-button:focus {
   box-shadow: 0 0 0 3px #cad7c4;
+}
+.gallery-filter-active {
+  background: var(--text-color-green-highlight) !important;
 }
 .photo-placeholder {
   min-height: 250px;
@@ -205,11 +202,22 @@ em {
   min-height: 25px;
 }
 .day-moment-visual {
-  min-height: 430px;
-  aspect-ratio: 4 / 5;
-  border-radius: 45% 45% 8px 8px;
-  background: #e1d6c8;
+  width: 100%;
+  max-height: 750px;
+  height: 750px;
 }
+@media only screen and (min-width: 768px) {
+  .day-moment-visual {
+    border-radius: 45% 45% 8px 8px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .day-moment-visual {
+    height: auto;
+  }
+}
+
 .day-moment-image {
   display: block;
   object-fit: cover;
@@ -250,6 +258,27 @@ em {
   padding-inline: 0;
   background: transparent;
   border: 0;
+}
+.p-gallery-header, .p-gallery-footer {
+  background-color: #f4f3eddc !important;
+}
+.p-gallery-footer {
+  border-top: none !important;
+}
+.p-gallery-thumbnail-item {
+  background-color: transparent !important;
+}
+.p-gallery-thumbnail-item:hover {
+  outline: 3px solid var(--text-color-green) !important;
+}
+.p-gallery-thumbnail-item[data-active] {
+  outline: 3px solid var(--text-color-green) !important;
+}
+.p-gallery-action:hover {
+  background: var(--text-color-green) !important;
+}
+.p-gallery-next:hover, .p-gallery-prev:hover {
+  background: var(--text-color-green) !important;
 }
 .wedding-gallery:not([data-fullscreen]) {
   height: min(72vh, 720px);
@@ -308,7 +337,7 @@ em {
 }
 .drop-zone.is-dragging {
   background: #e4ecdc;
-  outline: 2px solid #647c60;
+  outline: 2px solid var(--text-color-green);
 }
 .skip-link {
   position: fixed;

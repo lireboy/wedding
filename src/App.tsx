@@ -40,7 +40,7 @@ export default function App() {
                 </a>
                 <a
                   href="#erinnerungen-teilen"
-                  className="p-button p-button-outlined no-underline gap-2"
+                  className="p-button no-underline gap-2"
                 >
                   <i className="pi pi-upload" />
                   Erinnerungen teilen

@@ -79,7 +79,7 @@ export default function Gallery() {
               {categories.map((item) => (
                 <Button
                   key={item}
-                  variant={category === item ? undefined : 'outlined'}
+                  className={category === item ? 'gallery-filter-active' : ''}
                   aria-pressed={category === item}
                   onClick={() => selectCategory(item)}
                 >
@@ -88,7 +88,11 @@ export default function Gallery() {
               ))}
             </div>
           </Toolbar.Start>
-          <Toolbar.End>
+          <Toolbar.End className="flex flex-nowrap gap-4">
+            <a className="p-button no-underline gap-2" href='https://www.dropbox.com/scl/fo/21va46lroqokv2f9ah1pg/ANLOWRXApLYbhtDpkvu9bz0?rlkey=16zn8a5vi0qvy487791fauvxr&st=wcktcuo2&dl=0' target='_blank' rel='noopener noreferrer'>
+              <i className="pi pi-cloud-download" />
+              Bilder herunterladen (Dropbox)
+            </a>
             <span className="text-sm muted" aria-live="polite">
               {filtered.length} Bilder
             </span>
