@@ -7,11 +7,10 @@ export default function WeddingDay() {
 
   return (
     <section
-      id="unser-tag"
       aria-labelledby="day-title"
-      className="section-space rose-section px-4 md:px-6"
+      className="section-space rose-section px-4 md:px-4"
     >
-      <div className="page-width mx-auto">
+      <div id="unser-tag" className="page-width mx-auto">
         <div className="text-center mb-6">
           <h2 id="day-title" className="section-title mt-3 mb-3">
             Ein Tag fürs <em>Herz.</em>
@@ -50,9 +49,16 @@ export default function WeddingDay() {
                       className={`day-moment-button flex gap-4 w-full text-left border-none border-round-xl p-3 ${active ? 'is-active' : ''}`}
                       aria-pressed={active}
                       aria-controls="day-moment-image"
-                      onMouseEnter={() => setSelectedIndex(index)}
-                      onFocus={() => setSelectedIndex(index)}
-                      onClick={() => setSelectedIndex(index)}
+                      onMouseEnter={() => {
+                        setSelectedIndex(index)
+                      }}
+                      onFocus={() => {
+                        setSelectedIndex(index)
+                      }}
+                      onClick={() => {
+                        setSelectedIndex(index)
+                        document.getElementById("unser-tag")?.scrollIntoView({ behavior: "smooth" })
+                      }}
                     >
                       <span className="flex flex-column align-items-center">
                         <span className="timeline-dot flex align-items-center justify-content-center flex-shrink-0">

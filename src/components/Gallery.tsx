@@ -55,7 +55,6 @@ export default function Gallery() {
       <div className="page-width mx-auto">
         <div className="flex flex-column md:flex-row md:align-items-end justify-content-between gap-4 mb-5">
           <div>
-            <p className="eyebrow">03 / FÜR IMMER FESTGEHALTEN</p>
             <h2 id="gallery-title" className="section-title mt-3 mb-0">
               Unsere <em>Lieblingsmomente.</em>
             </h2>

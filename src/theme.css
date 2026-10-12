@@ -42,8 +42,8 @@ a {
   max-width: 1160px;
 }
 .section-space {
-  padding-top: clamp(4rem, 8vw, 7rem);
-  padding-bottom: clamp(4rem, 8vw, 7rem);
+  padding-top: clamp(2rem, 8vw, 4rem);
+  padding-bottom: clamp(2rem, 8vw, 4rem);
 }
 .editorial,
 .brand,

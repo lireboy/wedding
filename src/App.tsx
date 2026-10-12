@@ -39,7 +39,7 @@ export default function App() {
                   <i className="pi pi-arrow-down text-sm" aria-hidden="true" />
                 </a>
                 <a
-                  href="#gaestebereich"
+                  href="#erinnerungen-teilen"
                   className="p-button p-button-outlined no-underline gap-2"
                 >
                   <i className="pi pi-upload" />
@@ -55,11 +55,6 @@ export default function App() {
             </div>
             <div className="col-12 lg:col-6 relative p-3 md:p-5">
               <img src={wedding.heroImage} alt="Euer Lieblingsfoto" className="torbogen w-full h-full object-cover" />
-              <div className="photo-note absolute bottom-0 right-0 px-4 py-3 shadow-2">
-                <span className="editorial text-2xl">Ein kleines Ja.</span>
-                <br />
-                <span className="text-sm muted">Ein ganz großes Glück.</span>
-              </div>
             </div>
           </div>
         </section>

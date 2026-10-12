@@ -242,12 +242,12 @@ export default function GuestArea() {
       </section>
       {expiresAt && (
         <>
-          <Gallery />
           <UploadSection
             requestUrl={requestUrl}
             loading={requestLoading}
             error={requestError}
           />
+          <Gallery />
         </>
       )}
     </div>
