@@ -12,6 +12,9 @@ import App from './App.tsx'
 const primeReactConfig = {
   theme: {
     preset: Aura,
+    options: {
+      darkModeSelector: 'none' as const,
+    },
   },
   license: import.meta.env.VITE_PRIMEUI_LICENSE_KEY,
 }
