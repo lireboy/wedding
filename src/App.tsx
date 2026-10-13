@@ -5,6 +5,8 @@ import WeddingDay from './components/WeddingDay'
 import { wedding } from './data/wedding'
 import './App.css'
 
+import { Analytics } from '@vercel/analytics/react';
+
 export default function App() {
   return (
     <div className="min-h-screen">
@@ -67,6 +69,7 @@ export default function App() {
         <GuestArea />
       </main>
       <Footer />
+      <Analytics />
     </div>
   )
 }

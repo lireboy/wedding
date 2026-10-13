@@ -16,6 +16,7 @@
     "@primeicons/react": "^8.0.2",
     "@primereact/ui": "^11.2.0",
     "@primeuix/themes": "^3.0.1",
+    "@vercel/analytics": "^2.0.1",
     "primeflex": "^3.3.1",
     "primeicons": "^8.0.1",
     "primereact": "^11.2.0",
